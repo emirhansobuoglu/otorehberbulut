@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50px;
+}
+.custom-line {
+  border: 0; /* Varsayılan kenarlığı kaldırır */
+  height: 1px; /* Çizginin kalınlığı */
+  background-color: rgb(93, 153, 177); /* Çizginin rengi */
+  margin: 20px 0; /* Üst ve alt boşluk */
+}
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/fonts/Roboto-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "MyCustomFont", sans-serif;
+}

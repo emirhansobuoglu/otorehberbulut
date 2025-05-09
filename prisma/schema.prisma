@@ -1,0 +1,105 @@
+datasource db {
+    provider = "mongodb"
+    url = env("DATABASE_URL")
+}
+generator client {
+    provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+model User {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?         @unique
+  email         String?         
+  emailVerified DateTime?
+  image         String?
+  hashedPassword String?
+  role Role @default(USER)
+  accounts      Account[]
+}
+
+enum Role{
+    USER
+    ADMIN
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@unique([provider, providerAccountId])
+}
+
+model Marka{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    image String
+    modeller Model[]
+}
+model Model{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    markaid String @db.ObjectId
+    kasalar Kasa[]
+
+    marka Marka @relation(fields: [markaid],references: [id], onDelete: Cascade)
+}
+model Kasa{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    image String
+    year String
+    modelid String @db.ObjectId
+    versiyonlar Versiyon[]
+
+    model Model @relation(fields: [modelid],references: [id], onDelete: Cascade)
+}
+model Versiyon{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    kasaid String @db.ObjectId
+    segment String
+    engine_capacity String
+    horsepower String
+    torque String
+    fueltype String
+    fuel String
+    transmission String
+    topspeed String
+    accerelation String
+
+    kasa Kasa @relation(fields: [kasaid],references: [id], onDelete: Cascade)
+
+    Paket Paket[]
+}
+model Paket{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    versid String @db.ObjectId
+    paketicerik Paketicerik[]
+
+    vers Versiyon @relation(fields: [versid],references: [id],onDelete: Cascade)
+}
+
+model Paketicerik{
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    paketid String @db.ObjectId
+    icerik String
+
+    paket Paket @relation(fields: [paketid],references: [id],onDelete: Cascade)
+}
