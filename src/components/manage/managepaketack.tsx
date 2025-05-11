@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
@@ -10,30 +9,6 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Card, useDisclosure } from "@nextui-org/react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -109,12 +84,6 @@ const ManagePaketAck: React.FC<ManageVersProps> = ({ paketler }) => {
             >
               Düzenle
             </button>
-            <Link
-              href={`/admin/editpaket/detay/${params.row.id}`}
-              className="mx-3 flex w-1/2 cursor-pointer justify-center rounded-2xl bg-green-400"
-            >
-              Paket İçeriklerine Git
-            </Link>
           </div>
         );
       },
